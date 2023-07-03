@@ -5,13 +5,16 @@ This is simple website Backend mission for searching 42 subject.
 
 ---
 ## 🚀 기능 요구 사항
+이 레포지토리를 fork한 후 main에서 나만의 peerflow 서버를 만들어봅시다.
+branch와 pull request를 적극 활용해보세요!
+> demo/prod 브랜치는 사용하지 않습니다.
 
 ### 메인 화면
 - 메인 화면에는 모든 글에 대한 조회가 있어야 합니다.
 - 카테고리는 minishell, ft_irc, push_swap등 자유롭게 하되 총 3개의 카테고리 종류가 있어야 합니다. 카테고리를 눌렀을 때 해당 카테고리의 글만 조회할 수 있어야 합니다.
 - 검색과 정렬이 가능해야 합니다. 검색은 제목 검색만 구현합니다. 정렬은 최신순, 조회순, 추천순으로 정렬할 수 있게 해야합니다.
 - 페이지네이션이 구현되어있어야합니다
-- 글을 조회했을 때는 다음과 같은 정보가 나와야 합니다. 
+- 글을 조회했을 때는 다음과 같은 정보가 나와야 합니다.
   - example
     - 질문 제목
     - 카테고리
@@ -64,19 +67,25 @@ This is simple website Backend mission for searching 42 subject.
 ---
 
 ## 참고 사항
-1. 협업을 위한 컨벤션을 지켜봅시다.
-   - [컨벤션](docs/01-컨벤션.md)
-2. 기본적으로 엔티티 예시를 제공합니다.  
-   - ![](docs/image/peerflow-erd.png)
-3. 기본적으로 API 명세를 제공합니다.
-   - 더 좋은 방향으로 수정해도 좋습니다.
-   - [API 명세](https://www.notion.so/peer-study/peerflow-api-5898f07da57546669a021e033fea47e9?pvs=4)
+1. 처음 Build를 위한 초기 설정과 db setting방법을 제공합니다.
+  - [초기 설정](https://github.com/peer-42seoul/mission-peerflow-BE/issues/1)
+2. 협업을 위한 컨벤션을 지켜봅시다.
+  - [컨벤션](docs/01-컨벤션.md)
+3. 기본적으로 엔티티 예시를 제공합니다.
+  - ![](docs/image/peerflow-erd.png)
+4. 기본적으로 API 명세를 제공합니다.
+  - 더 좋은 방향으로 수정해도 좋습니다.
+  - [API 명세](https://www.notion.so/peer-study/peerflow-api-5898f07da57546669a021e033fea47e9?pvs=4)
+
+5. 디렉토리 안에 .keep 파일은 뭔가요?
+  - 디렉토리 구조를 잡아놓기 위해 임의로 넣은 임시 파일입니다. 해당 디렉토리에 파일을 생성하셨다면 .keep파일을 지우셔도 괜찮습니다.
+6. 시간상의 이유로 springboot 초기 설정과 entity 세팅을 하여 제공드리고 있습니다. 시간이 되신다면 build.gradle에 어떤 설정이 들어갔는지, 어떤 dependency가 있는지, 그리고 entity는 어떤 설정이 들어갔는지 공부해보시는 것도 추천드립니다.
 
 ---
 ## Bonus
-- 더 안전한 서버를 만들기 위해 Junit을 위한 test code를 작성해봅시다. 
 - request를 실패했을 때 error handling과 http error status을 고려해봅시다.
-- 프론트와의 협업을 위해 swagger나, Spring REST docs를 적용해봅시다. 
+- 더 안전한 서버를 만들기 위해 Junit을 이용하여 test code를 작성해봅시다.
+- 프론트와의 협업을 위해 swagger나, Spring REST docs를 적용해봅시다.
 
 > 하지만 당연하게도 이 세가지는 필수가 아닙니다. 기능 요구 사항을 모두 충족하고 시간이 남는다면 도전해보세요.
 
