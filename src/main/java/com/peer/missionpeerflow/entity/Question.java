@@ -15,17 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @Table(name = "question")
 @Entity
-@Setter
 public class Question extends BaseEntity {
 
 	@Id
@@ -40,10 +38,10 @@ public class Question extends BaseEntity {
 	private Category category;
 
 	@Column(nullable = false)
-	private Long recommend = 0L;
+	private Long recommend;
 
 	@Column(nullable = false)
-	private Long view = 0L;
+	private Long view;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Answer> answerList = new ArrayList<>();
@@ -51,7 +49,7 @@ public class Question extends BaseEntity {
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<QuestionComment> questionCommentList = new ArrayList<>();
 
-	public Question (QuestionRequest request) {
+	public Question(QuestionRequest request) {
 		this.title = request.getTitle();
 		this.category = request.getCategory();
 		this.nickname = request.getNickname();
