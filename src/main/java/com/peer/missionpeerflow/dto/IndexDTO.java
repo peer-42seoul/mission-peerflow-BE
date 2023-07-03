@@ -22,9 +22,9 @@ public class IndexDTO {
 
     private Category category;
 
-    private Long recommend = 0L;
+    private Long recommend;
 
-    private Long view = 0L;
+    private Long view;
 
     private String nickname;
 
