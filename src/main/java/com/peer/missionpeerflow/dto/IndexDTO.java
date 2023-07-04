@@ -29,6 +29,8 @@ public class IndexDTO {
 
 	private LocalDateTime createdAt;
 
+	private String content;
+
 	public static IndexDTO toIndexDTO(Question question) {
 		return new IndexDTO(
 						question.getQuestionId(),
@@ -38,7 +40,8 @@ public class IndexDTO {
 						question.getRecommend(),
 						question.getView(),
 						question.getNickname(),
-						question.getCreatedAt()
+						question.getCreatedAt(),
+						question.getContent()
 		);
 	}
 }
