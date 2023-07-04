@@ -1,6 +1,7 @@
 package com.peer.missionpeerflow.controller;
 
 import com.peer.missionpeerflow.dto.request.AnswerCommentRequest;
+import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.response.AnswerCommentResponse;
 import com.peer.missionpeerflow.service.AnswerCommentService;
 import javax.validation.Valid;
@@ -41,7 +42,7 @@ public class AnswerCommentController {
 
 	@PostMapping("/{commentId}")
 	public void deleteAnswerComment(@PathVariable(name = "commentId") Long commentId,
-					@RequestBody @Valid AnswerCommentRequest request) {
+					@RequestBody @Valid DeleteRequest request) {
 		answerCommentService.deleteAnswerComment(commentId, request);
 	}
 }

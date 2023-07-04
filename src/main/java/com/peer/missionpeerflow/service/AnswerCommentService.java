@@ -1,6 +1,7 @@
 package com.peer.missionpeerflow.service;
 
 import com.peer.missionpeerflow.dto.request.AnswerCommentRequest;
+import com.peer.missionpeerflow.dto.request.DeleteRequest;
 import com.peer.missionpeerflow.dto.response.AnswerCommentResponse;
 import com.peer.missionpeerflow.entity.Answer;
 import com.peer.missionpeerflow.entity.AnswerComment;
@@ -8,6 +9,7 @@ import com.peer.missionpeerflow.exception.ForbiddenException;
 import com.peer.missionpeerflow.exception.NotFoundException;
 import com.peer.missionpeerflow.repository.AnswerCommentRepository;
 import com.peer.missionpeerflow.repository.AnswerRespoitory;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -52,15 +54,14 @@ public class AnswerCommentService {
 	}
 
 	@Transactional
-	public void deleteAnswerComment(long commentId, AnswerCommentRequest request) {
+	public void deleteAnswerComment(long commentId, @Valid DeleteRequest request) {
 		AnswerComment comment = answerCommentRepository.findById(commentId).
 						orElseThrow(() -> new NotFoundException("해당 Id의 댓글이 존재하지 않습니다."));
 
-		if ((comment.getNickname().equals(request.getNickname())) && comment.getPassword().equals(request.getPassword())) {
+		if (comment.getPassword().equals(request.getPassword())) {
 			answerCommentRepository.delete(comment);
 		} else {
 			throw new ForbiddenException("유효하지 않은 비밀번호입니다.");
-			// 유효하지 않은 비밀번호 에러 던지기
 		}
 	}
 }
