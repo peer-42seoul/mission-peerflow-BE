@@ -36,7 +36,7 @@ public class IndexController {
 		}
 
 		if (indexDTOS.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(indexDTOS, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(indexDTOS, HttpStatus.OK);
 	}
