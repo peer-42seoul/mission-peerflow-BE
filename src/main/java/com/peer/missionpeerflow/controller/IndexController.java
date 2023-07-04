@@ -26,13 +26,14 @@ public class IndexController {
 	public ResponseEntity<Page<IndexDTO>> getIndex(
 					@RequestParam(value = "pagingIndex", defaultValue = "0") int pagingIndex,
 					@RequestParam(value = "pagingSize", defaultValue = "10") int pagingSize,
-					@RequestParam(required = false) String category) {
+					@RequestParam(required = false) String category,
+					@RequestParam(value = "sort", defaultValue = "latest") String sort) {
 		Page<IndexDTO> indexDTOS;
 		if (category == null) {
-			indexDTOS = indexService.getIndex(pagingIndex, pagingSize);
+			indexDTOS = indexService.getIndex(pagingIndex, pagingSize, sort);
 		} else {
 			Category cate = Category.ofType(category);
-			indexDTOS = indexService.getCategoryBoards(pagingIndex, pagingSize, cate);
+			indexDTOS = indexService.getCategoryBoards(pagingIndex, pagingSize, cate, sort);
 		}
 
 		if (indexDTOS.isEmpty()) {
@@ -42,7 +43,7 @@ public class IndexController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<Page<IndexDTO>> getIndex(
+	public ResponseEntity<Page<IndexDTO>> getIndexSearch(
 					@RequestParam(value = "pagingIndex", defaultValue = "0") int pagingIndex,
 					@RequestParam(value = "pagingSize", defaultValue = "10") int pagingSize,
 					@RequestParam("title") String title,
