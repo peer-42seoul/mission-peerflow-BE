@@ -1,46 +1,44 @@
 package com.peer.missionpeerflow.dto;
 
 import com.peer.missionpeerflow.entity.Question;
-import com.peer.missionpeerflow.util.Category;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class IndexDTO {
-    private Long questionId;
 
-    private String title;
+	private Long questionId;
 
-    private Integer answerCount;
+	private String title;
 
-    private Category category;
+	private Integer answerCount;
 
-    private Long recommend;
+	private String category;
 
-    private Long view;
+	private Long recommend;
 
-    private String nickname;
+	private Long view;
 
-    private LocalDateTime createdAt;
+	private String nickname;
 
-    public static IndexDTO toIndexDTO(Question question)
-    {
-        return new IndexDTO(
-                question.getQuestionId(),
-                question.getTitle(),
-                question.getAnswerList().size(),
-                question.getCategory(),
-                question.getRecommend(),
-                question.getView(),
-                question.getNickname(),
-                question.getCreatedAt()
-        );
-    }
+	private LocalDateTime createdAt;
+
+	public static IndexDTO toIndexDTO(Question question) {
+		return new IndexDTO(
+						question.getQuestionId(),
+						question.getTitle(),
+						question.getAnswerList().size(),
+						question.getCategory(),
+						question.getRecommend(),
+						question.getView(),
+						question.getNickname(),
+						question.getCreatedAt()
+		);
+	}
 }

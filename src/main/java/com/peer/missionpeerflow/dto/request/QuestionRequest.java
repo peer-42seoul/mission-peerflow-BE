@@ -1,11 +1,9 @@
 package com.peer.missionpeerflow.dto.request;
 
 import com.peer.missionpeerflow.util.Category;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import lombok.Getter;
 
 @Getter
@@ -27,6 +25,10 @@ public class QuestionRequest {
 
 	@NotNull(message = "내용을 입력해주세요.")
 	private String content;
+
+	private Long recommend = 0L;
+
+	private Long view = 0L;
 
 	private LocalDateTime createdAt;
 

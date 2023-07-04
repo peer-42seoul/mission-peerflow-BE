@@ -56,6 +56,8 @@ public class Question extends BaseEntity {
 		this.password = request.getPassword();
 		this.content = request.getContent();
 		this.createdAt = LocalDateTime.now();
+		this.recommend = request.getRecommend();
+		this.view = request.getView();
 	}
 
 	public void update(QuestionRequest request) {
@@ -67,5 +69,9 @@ public class Question extends BaseEntity {
 
 	public void addAnswer(Answer answer) {
 		this.answerList.add(answer);
+	}
+
+	public String getCategory() {
+		return this.category.getType();
 	}
 }
