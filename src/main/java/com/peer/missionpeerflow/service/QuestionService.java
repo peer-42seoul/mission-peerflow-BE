@@ -1,15 +1,17 @@
 package com.peer.missionpeerflow.service;
 
-import com.peer.missionpeerflow.dto.request.MainPageReqDto;
-import com.peer.missionpeerflow.dto.response.Content;
+import com.peer.missionpeerflow.dto.response.MainPageQuestionDto;
 import com.peer.missionpeerflow.entity.Question;
 import com.peer.missionpeerflow.repository.QuestionRepository;
 import com.peer.missionpeerflow.util.Category;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -17,14 +19,30 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    public List<Content> getList(MainPageReqDto mainPageReqDto) {
-        Category category = Category.ofType(mainPageReqDto.getCategory());
-        List<Question> questionList = this.questionRepository.findAllByCategory(category);
-        List<Content> mainPage = new ArrayList<>();
-        for (Question question : questionList) {
-            Content content = new Content(question);
-            mainPage.add(content);
+    public Page<MainPageQuestionDto> getList(Category category, String sort, int pageIndex, int pageSize) {
+        String sortRule = new String();
+        switch(sort) {
+            case "lastest":
+                sortRule = "createdAt";
+                break;
+            case "views":
+                sortRule = "view";
+                break;
+            case "recommends":
+                sortRule = "recommend";
+                break;
+            default:
+                sortRule = "createAt";
+                break;
         }
-        return mainPage;
+        Pageable pageable = PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.DESC, sortRule));
+        Page<Question> questions = this.questionRepository.findAllByCategory(pageable, category);
+        Page<MainPageQuestionDto> questionDtos = questions.map(new Function<Question, MainPageQuestionDto>() {
+            @Override
+            public MainPageQuestionDto apply(Question question) {
+                return new MainPageQuestionDto(question);
+            }
+        });
+        return questionDtos;
     }
 }

@@ -1,14 +1,13 @@
 package com.peer.missionpeerflow.dto.response;
 
 import com.peer.missionpeerflow.entity.Question;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-public class Content {
+public class MainPageQuestionDto {
 
-    private long id;
+    private long questionId;
     private long recommand;
     private long view;
     private int answerCount;
@@ -18,8 +17,9 @@ public class Content {
     private String createAt;
     private String nickname;
 
-    public Content(Question question) {
-        this.id = question.getQuestionId();
+    @Builder
+    public MainPageQuestionDto(Question question) {
+        this.questionId  = question.getQuestionId();
         this.recommand = question.getRecommend();
         this.view = question.getView();
         this.answerCount = question.getAnswerList().size();
